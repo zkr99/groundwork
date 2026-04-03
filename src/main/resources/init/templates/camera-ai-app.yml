@@ -1,0 +1,29 @@
+name: camera-ai-app
+description: "Example camera to AI app template. Edit the repo paths for your machine."
+version: 1
+references:
+  - repo: ~/path/to/core-agent
+    read_for: "Vision client, prompt structure, API patterns"
+  - repo: ~/path/to/mobile-app
+    read_for: "Mobile UX and state management patterns"
+strip:
+  - .git
+  - node_modules
+  - __pycache__
+  - .venv
+  - build
+  - dist
+  - .env
+  - .env.*
+claude_md:
+  template: ~/.groundwork/claude-templates/project-guide.md
+  variables:
+    project_name: "{{name}}"
+    description: "{{description}}"
+generate:
+  - README.md
+  - .gitignore: python-nextjs
+directories:
+  - backend/
+  - mobile/
+  - docs/
