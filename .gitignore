@@ -1,0 +1,35 @@
+# macOS
+.DS_Store
+
+# Gradle and JVM build outputs
+.gradle/
+build/
+out/
+*.class
+*.hprof
+hs_err_pid*
+replay_pid*
+
+# IDE/editor files
+.idea/
+.vscode/
+*.iml
+*.swp
+*.swo
+*~
+
+# Native-image and local binaries
+/groundwork
+/groundwork.exe
+*.dylib
+*.so
+*.dll
+*.o
+
+# Local development and test artifacts
+tmp/
+test-output/
+_reference/
+*.log
+*.orig
+/.java-version
