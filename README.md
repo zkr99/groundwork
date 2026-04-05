@@ -11,6 +11,18 @@ In practice, that means:
 
 If AI helps you decide what kind of project you want to build, Groundwork helps you start that kind of project the same way every time.
 
+## Release Status
+
+Groundwork is currently an open-source alpha.
+
+That means:
+
+- the core CLI works and is tested
+- the repo is ready for public source use
+- installation from source is solid today
+- tagged GitHub releases can publish JVM distribution assets
+- Homebrew and richer polish are still future work
+
 ## The Simple Idea
 
 Groundwork is not the tool that invents your product idea.
@@ -145,6 +157,67 @@ Groundwork does this:
 - `groundwork template discover <name> --from <workspace> ...`
 
 This is the first step toward hiding YAML from normal day-to-day usage.
+
+## Installation
+
+### Option 1: Run From Source
+
+Requirements:
+
+- Java 21+
+
+Clone the repo and run:
+
+```bash
+./gradlew test
+./gradlew run --args='--help'
+```
+
+### Option 2: Install A Local JVM CLI Distribution
+
+This is the best current way to use Groundwork as a normal JVM CLI on your machine.
+
+Requirements:
+
+- Java 21+
+
+Build and install locally:
+
+```bash
+./gradlew installDist
+./build/install/groundwork/bin/groundwork --help
+```
+
+You can also build release-style archives:
+
+```bash
+./gradlew distZip distTar
+```
+
+### Option 3: Build A Native Binary Locally
+
+Requirements:
+
+- GraalVM with `native-image`
+
+```bash
+JAVA_HOME=/Library/Java/JavaVirtualMachines/graalvm-25.jdk/Contents/Home \
+PATH="/Library/Java/JavaVirtualMachines/graalvm-25.jdk/Contents/Home/bin:$PATH" \
+./gradlew clean nativeCompile --no-daemon
+./build/native/nativeCompile/groundwork --help
+```
+
+### GitHub Releases
+
+Tagged releases now build and publish JVM distribution assets through GitHub Actions.
+
+Today, the smoothest install story is:
+
+- source checkout for contributors
+- `installDist` for local CLI use
+- GitHub release archives for wider alpha testing
+
+Homebrew packaging is not in place yet.
 
 ## Example End-To-End Usage
 
@@ -303,13 +376,14 @@ Groundwork is now usable as an early local tool.
 
 ### What Is Still Missing
 
-- GitHub Actions CI workflows
-- release automation
+- broader release automation, including native release assets
 - Homebrew tap packaging
 - richer git initialization flow
 - blueprint-to-template automation
 - AI-assisted template drafting
 - more command-level integration coverage
+
+Release automation has now started in the repo for JVM distribution assets, but the public distribution story is still early-stage rather than polished.
 
 ## Progress Estimate
 
@@ -322,6 +396,7 @@ Why the difference:
 
 - The core product works now.
 - The tooling, automation, packaging, and UX polish are not finished yet.
+- Alpha installation is now real, but public packaging convenience is still catching up.
 
 So the honest answer is:
 
