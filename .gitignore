@@ -33,3 +33,4 @@ _reference/
 *.log
 *.orig
 /.java-version
+REPO_METADATA.internal.md

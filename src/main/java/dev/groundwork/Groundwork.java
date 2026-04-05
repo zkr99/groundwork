@@ -6,13 +6,14 @@ import dev.groundwork.commands.ListCommand;
 import dev.groundwork.commands.NewCommand;
 import dev.groundwork.commands.TemplateCommand;
 import dev.groundwork.commands.ValidateCommand;
+import dev.groundwork.support.GroundworkVersionProvider;
 import picocli.CommandLine;
 import picocli.CommandLine.Command;
 
 @Command(
         name = "groundwork",
         mixinStandardHelpOptions = true,
-        version = "0.1.0",
+        versionProvider = GroundworkVersionProvider.class,
         description = "Scaffold projects from live local repositories.",
         subcommands = {
                 NewCommand.class,
