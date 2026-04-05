@@ -20,7 +20,7 @@ That means:
 - the core CLI works and is tested
 - the repo is ready for public source use
 - installation from source is solid today
-- tagged GitHub releases can publish JVM distribution assets
+- tagged GitHub releases are configured to publish JVM distribution assets
 - Homebrew and richer polish are still future work
 
 ## The Simple Idea
@@ -209,7 +209,7 @@ PATH="/Library/Java/JavaVirtualMachines/graalvm-25.jdk/Contents/Home/bin:$PATH" 
 
 ### GitHub Releases
 
-Tagged releases now build and publish JVM distribution assets through GitHub Actions.
+Tagged releases are configured to build and publish JVM distribution assets through GitHub Actions.
 
 Today, the smoothest install story is:
 
@@ -340,11 +340,11 @@ Then run the binary:
 ./build/native/nativeCompile/groundwork --help
 ```
 
-## Development Status
+## Current State
 
-Groundwork is now usable as an early local tool.
+Groundwork is usable today as an open-source alpha for local, reference-driven scaffolding workflows.
 
-### What Is Working
+What is working:
 
 - Java 21 Gradle CLI project
 - Picocli command surface
@@ -362,7 +362,7 @@ Groundwork is now usable as an early local tool.
 - JUnit coverage for core paths
 - successful GraalVM native build
 
-### What Has Been Verified
+What has been verified:
 
 - full JVM test suite passes
 - CLI smoke tests passed for:
@@ -374,7 +374,7 @@ Groundwork is now usable as an early local tool.
 - native binary builds and launches successfully
 - native binary validates templates that use built-in `CLAUDE` and `.gitignore` resources
 
-### What Is Still Missing
+Still missing:
 
 - broader release automation, including native release assets
 - Homebrew tap packaging
@@ -384,40 +384,6 @@ Groundwork is now usable as an early local tool.
 - more command-level integration coverage
 
 Release automation has now started in the repo for JVM distribution assets, but the public distribution story is still early-stage rather than polished.
-
-## Progress Estimate
-
-Two different estimates matter here:
-
-- Roughly **80% done** toward "useful for personal local use"
-- Roughly **60-65% done** toward "polished public v1"
-
-Why the difference:
-
-- The core product works now.
-- The tooling, automation, packaging, and UX polish are not finished yet.
-- Alpha installation is now real, but public packaging convenience is still catching up.
-
-So the honest answer is:
-
-- **Ready to use now:** yes, for a local early-adopter workflow
-- **Ready to publish as a polished tool:** not yet
-
-## Where It Sits In The Blueprint
-
-### Phase 1: Core Scaffolding
-
-This is effectively done.
-
-### Phase 2: Generators
-
-This is mostly done.
-
-### Phase 3: Polish and Distribution
-
-This has started, but is not complete.
-
-The biggest remaining gaps are around packaging, release automation, and better ergonomics beyond raw templates.
 
 ## Design Direction
 
