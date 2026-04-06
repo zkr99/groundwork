@@ -20,10 +20,10 @@ That means:
 - the core CLI works and is tested
 - the repo is ready for public source use
 - installation from source is solid today
-- tagged GitHub releases are configured to publish JVM distribution assets
-- Homebrew and richer polish are still future work
+- `v0.1.0-alpha.1` is published with JVM and native release assets
+- Homebrew installation is available from this repository tap
 
-Recommended first public tag: `v0.1.0-alpha.1`
+Current alpha tag: `v0.1.0-alpha.1`
 
 ## The Simple Idea
 
@@ -211,15 +211,26 @@ PATH="/Library/Java/JavaVirtualMachines/graalvm-25.jdk/Contents/Home/bin:$PATH" 
 
 ### GitHub Releases
 
-Tagged releases are configured to build and publish JVM distribution assets through GitHub Actions.
+Groundwork now publishes release assets through GitHub Actions.
 
-Today, the smoothest install story is:
+Current published assets include:
 
-- source checkout for contributors
-- `installDist` for local CLI use
-- GitHub release archives for wider alpha testing
+- JVM distribution archives
+- native binaries for `linux-x64`
+- native binaries for `macos-arm64`
 
-Homebrew packaging is not in place yet.
+### Option 4: Install With Homebrew
+
+Groundwork ships a Homebrew formula in this repository.
+
+Tap this repo explicitly, then install:
+
+```bash
+brew tap zkr99/groundwork https://github.com/zkr99/groundwork
+brew install zkr99/groundwork/groundwork
+```
+
+Homebrew installation uses the published JVM distribution and depends on `openjdk`.
 
 ## Example End-To-End Usage
 
@@ -380,8 +391,7 @@ What has been verified:
 
 Still missing:
 
-- broader release automation, including native release assets
-- Homebrew tap packaging
+- broader native coverage beyond `linux-x64` and `macos-arm64`
 - richer git initialization flow
 - blueprint-to-template automation
 - AI-assisted template drafting
