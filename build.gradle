@@ -5,7 +5,8 @@ plugins {
 }
 
 group = 'dev.groundwork'
-version = findProperty('groundworkVersion') ?: System.getenv('GROUNDWORK_VERSION') ?: '0.1.0-SNAPSHOT'
+def configuredVersion = (findProperty('groundworkVersion') ?: System.getenv('GROUNDWORK_VERSION') ?: '0.1.0-SNAPSHOT').toString()
+version = configuredVersion.startsWith('v') ? configuredVersion.substring(1) : configuredVersion
 
 java {
     toolchain {

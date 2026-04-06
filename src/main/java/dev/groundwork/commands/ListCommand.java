@@ -12,7 +12,7 @@ import java.util.List;
 import java.util.concurrent.Callable;
 import picocli.CommandLine.Command;
 
-@Command(name = "list", description = "List available templates.")
+@Command(name = "list", mixinStandardHelpOptions = true, description = "List available templates.")
 public final class ListCommand implements Callable<Integer> {
     @Override
     public Integer call() throws Exception {

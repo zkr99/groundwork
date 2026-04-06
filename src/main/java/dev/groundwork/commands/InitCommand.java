@@ -10,7 +10,7 @@ import java.util.Map;
 import java.util.concurrent.Callable;
 import picocli.CommandLine.Command;
 
-@Command(name = "init", description = "Create ~/.groundwork starter directories and example templates.")
+@Command(name = "init", mixinStandardHelpOptions = true, description = "Create ~/.groundwork starter directories and example templates.")
 public final class InitCommand implements Callable<Integer> {
     @Override
     public Integer call() throws Exception {

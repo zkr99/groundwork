@@ -3,11 +3,17 @@ package dev.groundwork.config;
 import java.nio.file.Path;
 
 public final class GroundworkPaths {
+    private static final String GROUNDWORK_HOME_ENV = "GROUNDWORK_HOME";
+
     public Path homeDirectory() {
         return Path.of(System.getProperty("user.home")).toAbsolutePath().normalize();
     }
 
     public Path groundworkHomeDirectory() {
+        String override = System.getenv(GROUNDWORK_HOME_ENV);
+        if (override != null && !override.isBlank()) {
+            return expandPath(override);
+        }
         return homeDirectory().resolve(".groundwork");
     }
 

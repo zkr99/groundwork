@@ -7,7 +7,7 @@ import java.util.concurrent.Callable;
 import picocli.CommandLine.Command;
 import picocli.CommandLine.Parameters;
 
-@Command(name = "clean", description = "Remove the _reference directory from an existing project.")
+@Command(name = "clean", mixinStandardHelpOptions = true, description = "Remove the _reference directory from an existing project.")
 public final class CleanCommand implements Callable<Integer> {
     @Parameters(index = "0", description = "Project directory.")
     private Path projectDirectory;

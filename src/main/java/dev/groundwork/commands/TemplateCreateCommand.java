@@ -19,7 +19,7 @@ import picocli.CommandLine.Parameters;
 import picocli.CommandLine.Spec;
 import picocli.CommandLine.Model.CommandSpec;
 
-@Command(name = "create", description = "Create a template file without hand-writing YAML.")
+@Command(name = "create", mixinStandardHelpOptions = true, description = "Create a template file without hand-writing YAML.")
 public final class TemplateCreateCommand implements Callable<Integer> {
     @Parameters(index = "0", description = "Template name.")
     private String name;

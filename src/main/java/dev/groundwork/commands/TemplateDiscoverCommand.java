@@ -18,7 +18,7 @@ import picocli.CommandLine.Parameters;
 import picocli.CommandLine.Spec;
 import picocli.CommandLine.Model.CommandSpec;
 
-@Command(name = "discover", description = "Create a template by discovering local git repos in a workspace.")
+@Command(name = "discover", mixinStandardHelpOptions = true, description = "Create a template by discovering local git repos in a workspace.")
 public final class TemplateDiscoverCommand implements Callable<Integer> {
     @Parameters(index = "0", description = "Template name.")
     private String name;
