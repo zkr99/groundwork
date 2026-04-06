@@ -6,6 +6,9 @@ on:
       - "v*"
   workflow_dispatch:
 
+env:
+  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: "true"
+
 permissions:
   contents: write
 
@@ -81,8 +84,6 @@ jobs:
         include:
           - os: ubuntu-latest
             target: linux-x64
-          - os: macos-15-intel
-            target: macos-x64
           - os: macos-14
             target: macos-arm64
     runs-on: ${{ matrix.os }}
