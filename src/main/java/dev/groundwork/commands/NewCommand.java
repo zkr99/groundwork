@@ -34,7 +34,7 @@ import picocli.CommandLine.Parameters;
 import picocli.CommandLine.Spec;
 import picocli.CommandLine.Model.CommandSpec;
 
-@Command(name = "new", description = "Create a new project from a template.")
+@Command(name = "new", mixinStandardHelpOptions = true, description = "Create a new project from a template.")
 public final class NewCommand implements Callable<Integer> {
     @Parameters(index = "0", description = "Project name.")
     private String name;

@@ -33,3 +33,9 @@ jobs:
 
       - name: Run tests
         run: ./gradlew test --no-daemon
+
+      - name: Build local CLI distribution
+        run: ./gradlew installDist --no-daemon
+
+      - name: Run end-to-end smoke test
+        run: ./scripts/smoke-test.sh ./build/install/groundwork/bin/groundwork

@@ -16,7 +16,7 @@ import picocli.CommandLine.Parameters;
 import picocli.CommandLine.Spec;
 import picocli.CommandLine.Model.CommandSpec;
 
-@Command(name = "validate", description = "Validate a template file or template name.")
+@Command(name = "validate", mixinStandardHelpOptions = true, description = "Validate a template file or template name.")
 public final class ValidateCommand implements Callable<Integer> {
     @Parameters(index = "0", description = "Template name or YAML path.")
     private String templateName;

@@ -33,6 +33,12 @@ jobs:
       - name: Run tests
         run: ./gradlew test --no-daemon
 
+      - name: Build local CLI distribution
+        run: ./gradlew installDist --no-daemon
+
+      - name: Run end-to-end smoke test
+        run: ./scripts/smoke-test.sh ./build/install/groundwork/bin/groundwork
+
   build-jvm-distributions:
     needs: verify
     runs-on: ubuntu-latest
@@ -56,6 +62,9 @@ jobs:
       - name: Build JVM distributions
         run: ./gradlew clean distZip distTar installDist --no-daemon
 
+      - name: Smoke test installed JVM CLI
+        run: ./scripts/smoke-test.sh ./build/install/groundwork/bin/groundwork
+
       - name: Upload release assets
         uses: actions/upload-artifact@v4
         with:
@@ -64,18 +73,83 @@ jobs:
             build/distributions/*
           if-no-files-found: error
 
+  build-native-binaries:
+    needs: verify
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - os: ubuntu-latest
+            target: linux-x64
+          - os: macos-13
+            target: macos-x64
+          - os: macos-14
+            target: macos-arm64
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 30
+    env:
+      GROUNDWORK_VERSION: ${{ github.ref_type == 'tag' && github.ref_name || '0.1.0-dev' }}
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up GraalVM
+        uses: graalvm/setup-graalvm@v1
+        with:
+          distribution: graalvm
+          java-version: "25.0.2"
+          cache: gradle
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Build native binary
+        run: ./gradlew clean nativeCompile --no-daemon
+
+      - name: Smoke test native CLI
+        run: ./scripts/smoke-test.sh ./build/native/nativeCompile/groundwork
+
+      - name: Package native binary
+        run: |
+          VERSION="${GROUNDWORK_VERSION#v}"
+          PACKAGE_DIR="groundwork-${VERSION}-${{ matrix.target }}"
+          mkdir -p "$PACKAGE_DIR"
+          cp ./build/native/nativeCompile/groundwork "$PACKAGE_DIR"/groundwork
+          cp LICENSE "$PACKAGE_DIR"/LICENSE
+          tar -czf "${PACKAGE_DIR}.tar.gz" "$PACKAGE_DIR"
+
+      - name: Upload native asset
+        uses: actions/upload-artifact@v4
+        with:
+          name: groundwork-native-${{ matrix.target }}
+          path: groundwork-*.tar.gz
+          if-no-files-found: error
+
   publish-release:
     if: github.ref_type == 'tag'
-    needs: build-jvm-distributions
+    needs:
+      - build-jvm-distributions
+      - build-native-binaries
     runs-on: ubuntu-latest
     timeout-minutes: 10
 
     steps:
-      - name: Download release assets
+      - name: Download JVM distribution assets
         uses: actions/download-artifact@v4
         with:
           name: groundwork-jvm-distributions
           path: release-assets
+
+      - name: Download native assets
+        uses: actions/download-artifact@v4
+        with:
+          pattern: groundwork-native-*
+          path: release-assets
+          merge-multiple: true
+
+      - name: Generate checksums
+        run: |
+          cd release-assets
+          shasum -a 256 * > groundwork-sha256.txt
 
       - name: Create GitHub release
         env:
