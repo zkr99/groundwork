@@ -23,6 +23,8 @@ That means:
 - tagged GitHub releases are configured to publish JVM distribution assets
 - Homebrew and richer polish are still future work
 
+Recommended first public tag: `v0.1.0-alpha.1`
+
 ## The Simple Idea
 
 Groundwork is not the tool that invents your product idea.
@@ -367,10 +369,12 @@ What has been verified:
 - full JVM test suite passes
 - CLI smoke tests passed for:
   - `init`
+  - `list`
   - `validate`
   - `new`
   - `clean`
   - `template create`
+  - `template discover`
 - native binary builds and launches successfully
 - native binary validates templates that use built-in `CLAUDE` and `.gitignore` resources
 
@@ -384,23 +388,6 @@ Still missing:
 - more command-level integration coverage
 
 Release automation has now started in the repo for JVM distribution assets, but the public distribution story is still early-stage rather than polished.
-
-## Design Direction
-
-The biggest UX problem with the original concept was:
-
-> "If I still have to hand-write YAML, why not just ask AI again?"
-
-The new `groundwork template create` command is the first answer to that problem.
-
-The likely next improvements are:
-
-1. interactive template creation
-2. template capture from an existing scaffolded project
-3. blueprint-to-template drafting
-4. AI-assisted repo selection and template generation
-
-That direction would let Groundwork keep its deterministic execution model while becoming much easier to adopt.
 
 ## Repo Structure
 
@@ -417,8 +404,8 @@ src/main/java/dev/groundwork/
 
 ## License
 
-MIT. See [LICENSE](/Users/johnny/Forge/LICENSE).
+MIT. See [LICENSE](LICENSE).
 
 ## Contributing
 
-See [CONTRIBUTING.md](/Users/johnny/Forge/CONTRIBUTING.md).
+See [CONTRIBUTING.md](CONTRIBUTING.md).
