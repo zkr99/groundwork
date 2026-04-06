@@ -20,10 +20,10 @@ That means:
 - the core CLI works and is tested
 - the repo is ready for public source use
 - installation from source is solid today
-- `v0.1.0-alpha.1` is published with JVM and native release assets
+- `v0.1.0-alpha.2` is published with JVM and native release assets
 - Homebrew installation is available from this repository tap
 
-Current alpha tag: `v0.1.0-alpha.1`
+Current alpha tag: `v0.1.0-alpha.2`
 
 ## The Simple Idea
 
@@ -397,7 +397,7 @@ Still missing:
 - AI-assisted template drafting
 - more command-level integration coverage
 
-Release automation has now started in the repo for JVM distribution assets, but the public distribution story is still early-stage rather than polished.
+Release automation now publishes JVM distribution assets plus native binaries for the supported targets, but the public distribution story is still early-stage rather than polished.
 
 ## Repo Structure
 
